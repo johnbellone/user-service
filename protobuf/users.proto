@@ -1,6 +1,5 @@
 syntax = "proto3";
-package goliath.api.v1;
-option go_package = "github.com/johnbellone/user-service/api";
+package goliath.api;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
@@ -20,8 +19,8 @@ message UserListResponse {
 }
 
 message RangeRequest {
-    int32 offset = 1 [default=0];
-    int32 limit = 2 [default=1000];
+    int32 offset = 1;
+    int32 limit = 2;
 }
 
 service Users {

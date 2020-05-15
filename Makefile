@@ -1,20 +1,15 @@
-PKG=github.com/johnbellone/user-service
-DATE?= $(shell date +%FT%T%z)
-COMMIT?=$(shell git describe --tags --always --dirty)
+BAZEL		= bazel
 
-all: build
+.PHONY: build
+build: gazelle
+	$(BAZEL) build //...
 
-proto:
-	protoc -I/usr/local/include -I. -I./vendor \
-	  -I./vendor/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-	  --grpc-gateway_out=logtostderr=true:. --micro_out=. --go_out=. \
-	  protobuf/*.proto
+clean:
+	$(BAZEL) clean --expunge
 
-deps:
-	go get ./...
+gazelle:
+	$(BAZEL) run //:gazelle -- update-repos -from_file=go.mod
+	$(BAZEL) run //:gazelle
 
-build: deps
-	go build -tags release \
-		-ldflags '-X $(PKG)/main.GitCommit=$(COMMIT) -X $(PKG)/main.BuildDate=$(DATE)' \
-		-o bin/user-service \
-		src/*.go
+tools:
+	go get -u github.com/bazelbuild/buildtools/buildifier
