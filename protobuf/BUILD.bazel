@@ -25,8 +25,8 @@ go_proto_library(
 
 go_library(
     name = "go_default_library",
-    embed = [":goliath_api_v1_go_proto"],
-    importpath = "github.com/johnbellone/user-service/protobuf",
+    embed = [":v1_go_proto"],
+    importpath = "github.com/johnbellone/user-service/api/v1",
     visibility = ["//visibility:public"],
 )
 
@@ -34,6 +34,15 @@ go_proto_library(
     name = "api_go_proto",
     compilers = ["@io_bazel_rules_go//proto:go_grpc"],
     importpath = "github.com/johnbellone/user-service/api",
+    proto = ":goliath_api_v1_proto",
+    visibility = ["//visibility:public"],
+    deps = ["@go_googleapis//google/api:annotations_go_proto"],
+)
+
+go_proto_library(
+    name = "v1_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "github.com/johnbellone/user-service/api/v1",
     proto = ":goliath_api_v1_proto",
     visibility = ["//visibility:public"],
     deps = ["@go_googleapis//google/api:annotations_go_proto"],

@@ -389,9 +389,9 @@ go_repository(
 
 go_repository(
     name = "com_github_coreos_etcd",
-    importpath = "github.com/coreos/etcd",
-    build_file_proto_mode = "disable",
     build_file_name = "BUILD.bazel",
+    build_file_proto_mode = "disable",
+    importpath = "github.com/coreos/etcd",
     sum = "h1:Zz1aXgDrFFi1nadh58tA9ktt06cmPTwNNP3dXwIq1lE=",
     version = "v3.3.18+incompatible",
 )
@@ -1203,8 +1203,8 @@ go_repository(
 
 go_repository(
     name = "com_github_micro_go_micro_v2",
-    importpath = "github.com/micro/go-micro/v2",
     build_file_proto_mode = "disable",
+    importpath = "github.com/micro/go-micro/v2",
     sum = "h1:HH6uEqTu6pkBtAlwAqQW2sf33640iEa1s9puGIctpO0=",
     version = "v2.6.0",
 )
