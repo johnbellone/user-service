@@ -20,14 +20,14 @@ var BuildDate string
 
 func main() {
 	service := micro.NewService(
-		micro.Name("cache-service"),
+		micro.Name("user-service"),
 		micro.Version(Version),
 		micro.RegisterTTL(time.Second*10),
 		micro.RegisterInterval(time.Second*10),
 	)
 
 	service.Init()
-	pb.RegisterCacheHandler(service.Server(), new(CacheHandler))
+	pb.RegisterUsersHandler(service.Server(), new(UsersHandler))
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
